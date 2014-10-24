@@ -2,13 +2,11 @@ var Friend = require("./friendModel");
 
 module.exports = {
 	getFriends: function(req, res){
-		Friend.find().exec(err, friends){}
-			if(!err){
-				res.send(friends);
-			} else {
-				res.send(err)
-			}
-		}
+		Friend.find().exec().then(function(friends){
+			res.send(friends)
+		}, function(err){
+			res.send(err)
+		})
 	},
 	addFriend: function(req, res){
 		var newFriend = new Friend(req.body);
